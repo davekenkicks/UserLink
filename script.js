@@ -40,7 +40,7 @@ const LinkedIn = new Platform()
     LinkedIn.name = "LinkedIn";
     LinkedIn.description = "A professional networking platform for connecting with colleagues and industry professionals.";
     LinkedIn.coolfontsIcon = "fa-brands fa-linkedin-in";
-    LinkedIn.link = "https://www.linkedin.com";
+    LinkedIn.link = "https://www.linkedin.com/in";
 }
 
 const Youtube = new Platform()
@@ -57,6 +57,7 @@ const TikTok = new Platform()
     TikTok.description = "A social media platform for creating and sharing short videos.";
     TikTok.coolfontsIcon = "fa-brands fa-tiktok";
     TikTok.link = "https://www.tiktok.com";
+    TikTok.profileUrl = (username) => `${TikTok.link}/@${username}`; // Override the profileUrl method for TikTok to include '@' before the username
 }
 
 const Reddit = new Platform()
@@ -64,7 +65,7 @@ const Reddit = new Platform()
     Reddit.name = "Reddit";
     Reddit.description = "A social news aggregation, web content rating, and discussion website.";
     Reddit.coolfontsIcon = "fa-brands fa-reddit-alien";
-    Reddit.link = "https://www.reddit.com";
+    Reddit.link = "https://www.reddit.com/user";
 }
 
 const Github = new Platform()
@@ -75,7 +76,16 @@ const Github = new Platform()
     Github.link = "https://www.github.com";
 }
 
-const platforms = [Facebook, Instagram, X, LinkedIn, Youtube, TikTok, Reddit, Github];
+const Snapchat = new Platform()
+{
+    Snapchat.name = "Snapchat";
+    Snapchat.description = "A social media platform for sharing photos and videos that disappear after being viewed.";
+    Snapchat.coolfontsIcon = "fa-brands fa-snapchat";
+    Snapchat.link = "https://www.snapchat.com/add";
+}
+
+
+const platforms = [Facebook, Instagram, X, LinkedIn, Youtube, TikTok, Reddit, Github, Snapchat];
 
 const searchForm = document.querySelector(".search");
 
@@ -90,11 +100,11 @@ searchForm.addEventListener("submit", (e) => {
     // Loop through the platforms array and log each platform's details
     for (let i = 0; i < platforms.length; i++) 
     {
+        
         let platformName = platforms[i].name; // Get the name of the platform
         let platformDescription = platforms[i].description; // Get the description of the platform
         let platformCoolFontsIcon = platforms[i].coolfontsIcon; // Get the CoolFonts icon class of the platform
-        let platformLink = platforms[i].link; // Get the link of the platform
-        let platformProfileUrl = platforms[i].profileUrl(username); // Get the profile URL for the given username on the platform
+        let platformProfileUrl = platforms[i].profileUrl(username); // Get the profile URL (TikTok overrides profileUrl to add '@')
         
         let resultItem = document.createElement("a");
         resultItem.classList.add("result-item"); // Add a class to the result item for styling
